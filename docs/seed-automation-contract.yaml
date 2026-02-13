@@ -1,0 +1,117 @@
+version: 1
+
+project:
+  name: "marketing"
+  codename: "beacon-routing"
+  description: "Marketing, grants, content distribution, and external amplification."
+  owners:
+    - handle: "4jp"
+      role: "architect"
+  repo:
+    monorepo: false
+    package_manager: "npm"
+    type: "marketing-platform"
+
+organ:
+  number: VII
+  role: "amplification"
+  github_org: "TBD"  # To be assigned (suggested: beacon-routing)
+  upstream: ["VI"]   # Receives from Community
+  downstream: ["I"]  # Sends feedback to Origin
+
+domain:
+  problem_statement: >
+    Amplify the omni-dromenon metasystem's reach through strategic marketing,
+    grant applications, and content distribution while feeding market signals
+    back to the system origin.
+  personas:
+    - id: "grant-writer"
+      description: "Prepares and submits grant applications."
+    - id: "content-creator"
+      description: "Creates blog posts, social content, newsletters."
+    - id: "press-liaison"
+      description: "Handles media inquiries and press releases."
+    - id: "analyst"
+      description: "Tracks metrics and provides market insights."
+
+architecture:
+  style: "content-pipeline"
+  tech_stack:
+    cms: "Ghost or Notion"
+    social: "Buffer API"
+    analytics: "Plausible + Custom Dashboards"
+    newsletter: "Buttondown"
+    design: "Figma"
+
+coding_standards:
+  language: "TypeScript"
+  style:
+    formatter: "prettier"
+    linter: "eslint"
+  content_standards:
+    brand_voice: "technical-poetic"
+    review_process: "peer-review"
+    asset_management: "DAM in brand-assets/"
+
+growth_objectives:
+  roadmap_epics:
+    - id: "ars-electronica-2025"
+      title: "Ars Electronica Submission"
+      description: "Submit omni-dromenon for Ars Electronica festival."
+      modules: ["grant-orchestration"]
+    - id: "starts-submission"
+      title: "S+T+ARTS Submission"
+      description: "Submit for S+T+ARTS Prize consideration."
+      modules: ["grant-orchestration"]
+    - id: "content-launch"
+      title: "Content Strategy Launch"
+      description: "Regular blog, social, and newsletter cadence."
+      modules: ["content-distribution"]
+    - id: "brand-system"
+      title: "Brand System"
+      description: "Complete brand guidelines and asset library."
+      modules: ["brand-assets"]
+
+dreamcatcher:
+  enabled: true
+  schedule: "on-demand"
+  budget:
+    max_loops: 25
+    max_files_touched: 8
+  providers:
+    architect: "claude-3-5-sonnet"
+    builder: "gpt-4o"
+    critic: "gemini-1.5-pro"
+
+automation_contract:
+  ai_access:
+    read_paths: ["grant-orchestration/**", "content-distribution/**", "analytics-reporting/**"]
+    write_paths: ["content-distribution/drafts/**", "analytics-reporting/**"]
+    disallowed_writes: ["seed.yaml", "grant-orchestration/submitted/**", "press-kits/**"]
+  gates:
+    inbound:
+      - name: "quality-threshold"
+        required: true
+        description: "Content must meet quality metrics before amplification."
+    outbound:
+      - name: "synthesis-review"
+        required: true
+        description: "Market signals require human synthesis before feedback to Origin."
+
+feedback_loop:
+  destination: "ORG-I"
+  artifacts:
+    - "market-signals"
+    - "user-research"
+    - "grant-outcomes"
+    - "content-performance"
+
+knowledge_graph:
+  enabled: true
+  db_path: "/Users/4jp/.metasystem/metastore.db"
+  auto_index: true
+  integration:
+    query_before_work: true
+    log_decisions: true
+    log_file_changes: true
+    cross_project_learning: true
