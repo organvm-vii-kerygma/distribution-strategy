@@ -1,5 +1,5 @@
 """Tests for the channels module."""
-from src.channels import ChannelRegistry, ChannelConfig
+from kerygma_strategy.channels import ChannelRegistry, ChannelConfig
 
 def test_register_and_retrieve_channel():
     reg = ChannelRegistry()

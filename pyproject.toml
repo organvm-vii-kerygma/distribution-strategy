@@ -4,9 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "distribution-strategy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Content scheduling, multi-channel distribution, and analytics for the marketing layer"
 requires-python = ">=3.11"
+dependencies = ["pyyaml>=6.0"]
+
+[tool.setuptools.packages.find]
+include = ["kerygma_strategy*"]
+
+[project.scripts]
+distrib = "kerygma_strategy.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "ruff>=0.4.0"]

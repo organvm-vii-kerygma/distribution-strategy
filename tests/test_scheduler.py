@@ -1,6 +1,6 @@
 """Tests for the scheduler module."""
 from datetime import datetime, timedelta
-from src.scheduler import ContentScheduler, ScheduleEntry, Frequency
+from kerygma_strategy.scheduler import ContentScheduler, ScheduleEntry, Frequency
 
 def test_schedule_entry_is_due():
     past = datetime.now() - timedelta(hours=1)

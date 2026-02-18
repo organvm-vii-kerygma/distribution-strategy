@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from src.analytics import AnalyticsCollector, EngagementMetric
+from kerygma_strategy.analytics import AnalyticsCollector, EngagementMetric
 
 
 def test_record_and_retrieve():

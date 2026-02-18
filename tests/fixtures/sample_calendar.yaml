@@ -1,0 +1,19 @@
+calendar:
+  events:
+    - event_id: knight-2026
+      name: "Knight Foundation Deadline"
+      event_type: grant_deadline
+      start_date: "2026-04-15"
+      posting_modifier: 1.5
+    - event_id: siggraph-2026
+      name: "SIGGRAPH 2026"
+      event_type: conference
+      start_date: "2026-07-27"
+      end_date: "2026-07-31"
+      posting_modifier: 1.5
+    - event_id: winter-break
+      name: "Winter Holiday Quiet Period"
+      event_type: quiet_period
+      start_date: "2026-12-23"
+      end_date: "2027-01-02"
+      posting_modifier: 0.3

@@ -5,9 +5,13 @@ providing insights for optimizing distribution strategy.
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from kerygma_strategy.persistence import JsonStore
 
 
 @dataclass
@@ -42,11 +46,64 @@ class EngagementMetric:
 class AnalyticsCollector:
     """Collects and aggregates distribution performance metrics."""
 
-    def __init__(self) -> None:
+    def __init__(self, store: JsonStore | None = None, persist_every: int = 50) -> None:
         self._metrics: list[EngagementMetric] = []
+        self._store = store
+        self._persist_every = persist_every
+        self._unsaved_count = 0
+        if store:
+            self._load_from_store()
+
+    def _load_from_store(self) -> None:
+        """Load metrics from persistent store."""
+        if not self._store:
+            return
+        raw = self._store.get("metrics", [])
+        for item in raw:
+            self._metrics.append(EngagementMetric(
+                channel_id=item["channel_id"],
+                content_id=item["content_id"],
+                timestamp=datetime.fromisoformat(item["timestamp"]),
+                impressions=item.get("impressions", 0),
+                clicks=item.get("clicks", 0),
+                shares=item.get("shares", 0),
+                replies=item.get("replies", 0),
+            ))
+
+    def _persist(self) -> None:
+        """Save metrics to persistent store."""
+        if not self._store:
+            return
+        self._store.set("metrics", [m.to_dict() for m in self._metrics])
+        self._store.save()
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> AnalyticsCollector:
+        """Deserialize from a dict (e.g., loaded from JSON)."""
+        collector = cls()
+        for item in data.get("metrics", []):
+            collector._metrics.append(EngagementMetric(
+                channel_id=item["channel_id"],
+                content_id=item["content_id"],
+                timestamp=datetime.fromisoformat(item["timestamp"]),
+                impressions=item.get("impressions", 0),
+                clicks=item.get("clicks", 0),
+                shares=item.get("shares", 0),
+                replies=item.get("replies", 0),
+            ))
+        return collector
 
     def record(self, metric: EngagementMetric) -> None:
         self._metrics.append(metric)
+        self._unsaved_count += 1
+        if self._unsaved_count >= self._persist_every:
+            self.flush()
+
+    def flush(self) -> None:
+        """Force-persist any unsaved metrics to disk."""
+        if self._unsaved_count > 0:
+            self._persist()
+            self._unsaved_count = 0
 
     def get_by_channel(self, channel_id: str) -> list[EngagementMetric]:
         return [m for m in self._metrics if m.channel_id == channel_id]
@@ -71,6 +128,11 @@ class AnalyticsCollector:
             content_rates.setdefault(m.content_id, []).append(m.engagement_rate)
         averages = [(cid, sum(rates) / len(rates)) for cid, rates in content_rates.items()]
         return sorted(averages, key=lambda x: x[1], reverse=True)[:limit]
+
+    @property
+    def all_metrics(self) -> list[EngagementMetric]:
+        """Public read-only access to the full metrics list."""
+        return list(self._metrics)
 
     @property
     def total_records(self) -> int:
