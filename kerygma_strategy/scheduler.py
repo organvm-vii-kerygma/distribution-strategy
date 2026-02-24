@@ -88,7 +88,7 @@ class ContentScheduler:
         if entry.frequency != Frequency.ONCE:
             next_time = entry.next_occurrence()
             if next_time:
-                new_id = f"{entry_id}-next"
+                new_id = f"{entry_id}-{next_time.strftime('%Y%m%d%H%M%S')}"
                 new_entry = ScheduleEntry(
                     entry_id=new_id, content_id=entry.content_id,
                     channel=entry.channel, scheduled_time=next_time,

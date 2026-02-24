@@ -6,15 +6,13 @@ Uses Ghost Admin API (JWT) for member data, Content API for public post data.
 """
 from __future__ import annotations
 
-import hashlib
-import hmac
 import json
-import time
 import urllib.request
 import urllib.error
-from base64 import urlsafe_b64encode
 from dataclasses import dataclass
 from typing import Any
+
+from kerygma_social.ghost_jwt import build_ghost_jwt
 
 
 @dataclass
@@ -30,21 +28,7 @@ class GhostMetricsClient:
         self._live = live
 
     def _build_jwt(self) -> str:
-        parts = self.config.admin_api_key.split(":")
-        if len(parts) != 2:
-            raise ValueError("Ghost admin_api_key must be in {id}:{secret} format")
-        key_id, secret_hex = parts
-
-        header = json.dumps({"alg": "HS256", "typ": "JWT", "kid": key_id}, separators=(",", ":"))
-        now = int(time.time())
-        payload = json.dumps({"iat": now, "exp": now + 300, "aud": "/admin/"}, separators=(",", ":"))
-
-        def b64(data: bytes) -> str:
-            return urlsafe_b64encode(data).rstrip(b"=").decode()
-
-        signing_input = f"{b64(header.encode())}.{b64(payload.encode())}"
-        sig = hmac.new(bytes.fromhex(secret_hex), signing_input.encode(), hashlib.sha256).digest()
-        return f"{signing_input}.{b64(sig)}"  # allow-secret — runtime JWT
+        return build_ghost_jwt(self.config.admin_api_key)  # allow-secret — runtime JWT
 
     def _admin_get(self, path: str) -> dict[str, Any]:
         token = self._build_jwt()  # allow-secret — runtime JWT
