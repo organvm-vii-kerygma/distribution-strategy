@@ -23,9 +23,17 @@ agents:
     description: "Continuous integration pipeline"
 
 produces:
-  - type: distribution-artifact
-    description: "Distribution strategy, POSSE template, or audience analytics"
+  - type: distribution_artifact
+    description: "Distribution strategy, channel reports, and audience analytics"
     consumers: [ORGAN-IV]
+
+data_artifacts:
+  - path: data/distribution-plan.json
+    type: distribution_artifact
+    description: "Channel inventory, calendar events, scheduling config"
+  - path: data/channel-report.json
+    type: distribution_artifact
+    description: "Platform capabilities, analytics and report schema"
 
 consumes:
   - type: essay

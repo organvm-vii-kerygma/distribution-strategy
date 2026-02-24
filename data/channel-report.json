@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-02-24T14:21:50.514828+00:00",
+  "organ": "VII",
+  "organ_name": "Kerygma",
+  "repo": "distribution-strategy",
+  "platforms": [
+    {
+      "platform": "mastodon",
+      "channels": [
+        "mastodon-main"
+      ],
+      "max_length": 500
+    },
+    {
+      "platform": "discord",
+      "channels": [
+        "discord-announce"
+      ],
+      "max_length": 4096
+    },
+    {
+      "platform": "bluesky",
+      "channels": [
+        "bluesky-main"
+      ],
+      "max_length": 300
+    }
+  ],
+  "analytics_schema": {
+    "class": "EngagementMetric",
+    "fields": [
+      {
+        "field": "channel_id",
+        "type": "string"
+      },
+      {
+        "field": "content_id",
+        "type": "string"
+      },
+      {
+        "field": "timestamp",
+        "type": "datetime"
+      },
+      {
+        "field": "impressions",
+        "type": "integer"
+      },
+      {
+        "field": "clicks",
+        "type": "integer"
+      },
+      {
+        "field": "shares",
+        "type": "integer"
+      },
+      {
+        "field": "replies",
+        "type": "integer"
+      },
+      {
+        "field": "engagement_rate",
+        "type": "float",
+        "computed": true
+      }
+    ]
+  },
+  "report_schema": {
+    "class": "ReportData",
+    "fields": [
+      {
+        "field": "period",
+        "type": "object",
+        "subfields": [
+          "start",
+          "end",
+          "label"
+        ]
+      },
+      {
+        "field": "total_metrics",
+        "type": "integer"
+      },
+      {
+        "field": "channel_summary",
+        "type": "object"
+      },
+      {
+        "field": "top_content",
+        "type": "list"
+      },
+      {
+        "field": "total_impressions",
+        "type": "integer"
+      },
+      {
+        "field": "total_engagement",
+        "type": "integer"
+      }
+    ]
+  }
+}
