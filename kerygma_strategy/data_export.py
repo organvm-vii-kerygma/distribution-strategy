@@ -55,7 +55,7 @@ def build_distribution_plan(fixtures_dir: Path | None = None) -> dict[str, Any]:
             "name": ev_data["name"],
             "event_type": ev_data["event_type"],
             "start_date": str(ev_data["start_date"]),
-            "end_date": str(ev_data.get("end_date", "")),
+            "end_date": str(ev_data["end_date"]) if ev_data.get("end_date") else None,
             "posting_modifier": ev_data.get("posting_modifier", 1.0),
         })
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T14:21:50.514088+00:00",
+  "generated_at": "2026-02-24T16:31:21.704582+00:00",
   "organ": "VII",
   "organ_name": "Kerygma",
   "repo": "distribution-strategy",
@@ -38,7 +38,7 @@
       "name": "Knight Foundation Deadline",
       "event_type": "grant_deadline",
       "start_date": "2026-04-15",
-      "end_date": "",
+      "end_date": null,
       "posting_modifier": 1.5
     },
     {
