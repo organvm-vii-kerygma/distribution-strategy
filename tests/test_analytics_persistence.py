@@ -1,7 +1,6 @@
 """Tests for analytics persistence integration."""
 
 from datetime import datetime
-from pathlib import Path
 
 from kerygma_strategy.analytics import AnalyticsCollector, EngagementMetric
 from kerygma_strategy.persistence import JsonStore

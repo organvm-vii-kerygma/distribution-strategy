@@ -1,9 +1,9 @@
 """Tests for scheduler + calendar integration."""
 
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 
 from kerygma_strategy.calendar import DistributionCalendar, CalendarEvent
-from kerygma_strategy.scheduler import ContentScheduler, ScheduleEntry, Frequency
+from kerygma_strategy.scheduler import ContentScheduler, ScheduleEntry
 
 
 def _make_calendar_with_quiet() -> DistributionCalendar:

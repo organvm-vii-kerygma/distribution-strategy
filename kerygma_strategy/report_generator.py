@@ -115,14 +115,14 @@ class ReportGenerator:
         """Render a report as Markdown."""
         lines = [
             f"# Distribution Report ({report.period.label})",
-            f"",
+            "",
             f"**Period:** {report.period.start:%Y-%m-%d} to {report.period.end:%Y-%m-%d}",
             f"**Total metrics:** {report.total_metrics}",
             f"**Total impressions:** {report.total_impressions:,}",
             f"**Total engagement:** {report.total_engagement:,}",
-            f"",
-            f"## Channel Performance",
-            f"",
+            "",
+            "## Channel Performance",
+            "",
         ]
         for ch_id, stats in report.channel_summary.items():
             lines.append(f"### {ch_id}")

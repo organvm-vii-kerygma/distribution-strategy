@@ -10,7 +10,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import sys
 from pathlib import Path
 
 from kerygma_strategy.config import load_config

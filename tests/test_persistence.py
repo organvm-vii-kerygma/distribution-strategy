@@ -1,7 +1,6 @@
 """Tests for the persistence module."""
 
 import json
-from pathlib import Path
 
 from kerygma_strategy.persistence import JsonStore
 

@@ -12,7 +12,7 @@ import urllib.error
 from dataclasses import dataclass
 from typing import Any
 
-from kerygma_social.ghost_jwt import build_ghost_jwt
+from kerygma_strategy._ghost_jwt import build_ghost_jwt
 
 
 @dataclass
