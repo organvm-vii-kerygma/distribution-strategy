@@ -1,0 +1,8 @@
+schema_version: '1.0'
+repo: distribution-strategy
+organ: VII
+display_name: 'Distribution strategy brain: analytics, scheduling, persistence, report
+  generation, Mastodon metrics pull-back, Ghost metrics pull-back, 66 tests'
+delivery:
+- platform: web_app
+  status: not_started
