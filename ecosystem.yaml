@@ -1,8 +1,30 @@
 schema_version: '1.0'
 repo: distribution-strategy
 organ: VII
-display_name: 'Distribution strategy brain: analytics, scheduling, persistence, report
-  generation, Mastodon metrics pull-back, Ghost metrics pull-back, 66 tests'
+display_name: "Distribution strategy brain — analytics, scheduling, Mastodon/Ghost metrics pull-back"
+
 delivery:
-- platform: web_app
+- platform: python_library
+  status: live
+  priority: critical
+  notes: "Analytics engine, scheduling, persistence, report generation, 66 tests"
+  next_action: "Maintain and extend with new channel analytics"
+
+marketing:
+- platform: analytics
+  status: live
+  priority: critical
+  notes: "Cross-channel distribution analytics and reporting"
+  next_action: "Add new metric sources as channels expand"
+- platform: scheduling
+  status: live
+  priority: high
+  notes: "Content scheduling and optimal timing analysis"
+  next_action: "Refine scheduling algorithm with engagement data"
+
+content:
+- platform: docs_site
   status: not_started
+  priority: medium
+  notes: "Strategy methodology, analytics reference, scheduling guide"
+  next_action: "Document distribution strategy framework"
